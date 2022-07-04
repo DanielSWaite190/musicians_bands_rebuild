@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node server.js",
     "test": "jest",
-    "test-watch": "jest --watch",
+    "test-watch": "jest --watch"
   },
   "author": "Daniel S. Waite",
   "license": "ISC",

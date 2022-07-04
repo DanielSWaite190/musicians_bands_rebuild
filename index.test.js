@@ -18,7 +18,7 @@ describe('Band and Musician Models', () => {
          * Create a new instance of a band using the Band Model
          *  Check to see if the name passed into the object is in fact the correct on the new instance
          **/
-        expect('NO TEST').toBe('EXPECTED VALUE HERE');
+        expect(Band.create(request.body)).toBe('EXPECTED VALUE HERE');
     })
 
     test('can create a Musician', async () => {
