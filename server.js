@@ -19,8 +19,29 @@ app.use(express.urlencoded({extended:true}));
 app.get('/', (request, response) => {
     response.json("Hi Mom")
 })
+
+app.get('/restaurants', async(request, response) => {
+    response.json(await Band.findAll())
+})
+
 app.post('/restaurants', async(request, response) => {
     Band.create(request.body)
-    Band.create({danile: "is da best"})
-    response.json(await Restaurant.findAll())
+    response.json(await Band.findAll())
+})
+
+app.get('/test/:id', async(request, response) => {
+    // const five = await Band.findByPk({
+    //     where: {id: request.params.id}
+    // })
+    // response.json(five)
+    const rw = await Band.findByPk(request.params.id)
+    response.json(rw.name)
+
+})
+
+app.delete('/restaurants/:id', async(request, response) => {
+    Band.destroy({
+        where: {id: request.params.id}
+    })
+    response.json(await Band.findAll())
 })
