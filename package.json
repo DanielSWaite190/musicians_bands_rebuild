@@ -1,0 +1,19 @@
+{
+  "name": "musicians-bands",
+  "version": "1.0.0",
+  "description": "Rebuild of Jonathan's repo",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "jest",
+    "test-watch": "jest --watch",
+  },
+  "author": "Daniel S. Waite",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.1",
+    "jest": "^28.1.2",
+    "sequelize": "^6.21.2",
+    "sqlite": "^4.1.1"
+  }
+}
