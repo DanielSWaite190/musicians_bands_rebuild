@@ -1,5 +1,5 @@
 const {sequelize} = require('./db');
-const {Band, Musician} = require('./index')
+const {Band, Musician, Song} = require('./index')
 
 describe('Band and Musician Models', () => {
     /**
@@ -52,6 +52,16 @@ describe('Band and Musician Models', () => {
         const actual = await Band.findByPk(1)
         expect(actual).toBe(null);
     })
+
+    test('can create a Song', async () => {
+        Song.create({title: "Stronger", year: 2007})
+        const actual = await Song.findByPk(1)
+        expect(actual.title).toBe("Stronger");
+        expect(actual.year).toBe(2007);
+
+    })
+
+
     /*
      * Optional test to show associations:
         - I've completed this test for you
