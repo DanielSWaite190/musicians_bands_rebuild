@@ -18,10 +18,11 @@ describe('Band and Musician Models', () => {
          * Create a new instance of a band using the Band Model
          *  Check to see if the name passed into the object is in fact the correct on the new instance
          **/
-        Band.create({name: "Insync"})
+        Band.create({name: "Insync", showCount: 50})
         const actual = await Band.findByPk(1)
         
         expect(actual.name).toBe("Insync");
+        expect(actual.showCount).toBe(50); // <-- testing showCount 
     })
 
     test('can create a Musician', async () => {
@@ -36,6 +37,21 @@ describe('Band and Musician Models', () => {
 
     })
 
+    test('can change a Band', async () => {
+        Band.update({name: "Maroon 5"},{
+            where: {id: 1}
+        })
+        const actual = await Band.findByPk(1)
+        expect(actual.name).toBe("Maroon 5");
+    })
+    
+    test('can remove a Band', async () => {
+        Band.destroy({
+            where: {id: 1}
+        })
+        const actual = await Band.findByPk(1)
+        expect(actual).toBe(null);
+    })
     /*
      * Optional test to show associations:
         - I've completed this test for you

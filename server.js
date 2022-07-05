@@ -22,6 +22,14 @@ app.post('/restaurants', async(request, response) => {
     Band.create(request.body)
     response.json(await Band.findAll())
 })
+
+app.put('/restaurants/:id', async(request, response) => {
+    Band.update(request.body,{
+        where: {id: request.params.id}
+    })
+    response.json(await Band.findAll())
+})
+
 app.delete('/restaurants/:id', async(request, response) => {
     Band.destroy({
         where: {id: request.params.id}

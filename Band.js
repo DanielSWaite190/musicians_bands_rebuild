@@ -9,7 +9,8 @@ This will involve calling the sequelize.define() method, and passing in two argu
 */
 const Band = sequelize.define('band', {
     name: Sequelize.STRING,
-    genre : Sequelize.STRING
+    genre : Sequelize.STRING,
+    showCount: Sequelize.INTEGER
 });
 
 module.exports = {
