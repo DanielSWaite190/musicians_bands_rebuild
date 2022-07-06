@@ -58,10 +58,19 @@ describe('Band and Musician Models', () => {
         const actual = await Song.findByPk(1)
         expect(actual.title).toBe("Stronger");
         expect(actual.year).toBe(2007);
-
     })
 
+    test('Band can have many songs', async () => {
+        let linkinPark = await Band.create({ name: 'Linkin Park'})
+        let newDivide = await Song.create( {name: 'newDivide' })
+        let WhatIveDone = await Song.create( {name: 'What I\'ve Done' })
 
+        await linkinPark.addSong(newDivide)
+        await linkinPark.addSong(WhatIveDone)
+
+        const songs = await linkinPark.getSongs()
+        expect(songs.length).toBe(2)
+    })
     /*
      * Optional test to show associations:
         - I've completed this test for you

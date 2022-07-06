@@ -13,7 +13,7 @@ const {Musician} = require('./Musician')
 
 Musician.belongsTo(Band)
 Band.hasMany(Musician)
-Song.hasMany(Band)
+Band.hasMany(Song)
 
 module.exports = {
     Band,
