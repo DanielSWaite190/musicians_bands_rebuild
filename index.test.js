@@ -2,22 +2,11 @@ const {sequelize} = require('./db');
 const {Band, Musician, Song} = require('./index')
 
 describe('Band and Musician Models', () => {
-    /**
-     * Runs the code prior to all tests
-     */
     beforeAll(async () => {
-        // the 'sync' method will create tables based on the model class
-        // by setting 'force:true' the tables are recreated each time the 
-        // test suite is run
         await sequelize.sync({ force: true });
     })
 
     test('can create a Band', async () => {
-        // TODO - test creating a band
-        /**
-         * Create a new instance of a band using the Band Model
-         *  Check to see if the name passed into the object is in fact the correct on the new instance
-         **/
         Band.create({name: "Insync", showCount: 50})
         const actual = await Band.findByPk(1)
         
@@ -26,11 +15,6 @@ describe('Band and Musician Models', () => {
     })
 
     test('can create a Musician', async () => {
-        // TODO - test creating a musician
-        /**
-         * Create a new instance of a musician using the Musician Model
-         *  Check to see if the name or intrument passed into the object is infact the correct on the new instance
-         **/
         Musician.create({name: "Justin Timberlake"})
         const actual = await Musician.findByPk(1)
         expect(actual.name).toBe("Justin Timberlake");
@@ -61,9 +45,9 @@ describe('Band and Musician Models', () => {
     })
 
     test('Band can have many songs', async () => {
-        let linkinPark = await Band.create({ name: 'Linkin Park'})
-        let newDivide = await Song.create( {name: 'newDivide' })
-        let WhatIveDone = await Song.create( {name: 'What I\'ve Done' })
+        let linkinPark = await Band.create({name: 'Linkin Park' , genre: 'Hard Rock', showCount: 74})
+        let newDivide = await Song.create( {title: 'newDivide' , year: 2009})
+        let WhatIveDone = await Song.create( {title: 'What I\'ve Done' , year: 2007})
 
         await linkinPark.addSong(newDivide)
         await linkinPark.addSong(WhatIveDone)
@@ -71,11 +55,24 @@ describe('Band and Musician Models', () => {
         const songs = await linkinPark.getSongs()
         expect(songs.length).toBe(2)
     })
-    /*
-     * Optional test to show associations:
-        - I've completed this test for you
-        - I've left it here for you to see how to go about testing associations 
-    */
+
+    test('Band can have many songs', async () => {
+        let selena = await Band.create({name: 'Selena Gomez And The Scene' , genre: 'Pop', showCount: 13})
+        let love = await Song.create( {title: 'Love You Like A Love Song' , year: 2011})
+        let rr = await Song.create( {title: 'Round & Round' , year: 2010})
+
+        await selena.addSong(love)
+        await selena.addSong(rr)
+
+        s = await Musician.create({ name: 'Selena', instrument: 'Voice' })
+        selena.addMusician(s)
+
+        const songs = await selena.getSongs()
+        const musicians = await selena.getMusicians()
+
+        expect(songs.length).toBe(2)
+        expect(musicians.length).toBe(1)
+    })
 
     test('Band can have many Musicians', async () => {
         await sequelize.sync({ force: true }); // recreate db
